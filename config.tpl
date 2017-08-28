@@ -1,4 +1,3 @@
-
 <div class="panel">
 	<div class="row" id="Omnisense_top">
 		<div class="col-lg-6">

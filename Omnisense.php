@@ -5,7 +5,7 @@ class Omnisense extends Module{
 		$this->name = 'Omnisense';
 		$this->tab = 'analytics_stats';
 		$this->version = '1.0';
-		$this->author = 'I SEE U';
+		$this->author = 'Omnisense';
 		$this->bootstrap = true;
 
 		parent::__construct();
@@ -30,7 +30,7 @@ class Omnisense extends Module{
  	}
 
 //Configuration page
-	public function displayForm()
+public function displayForm()
 	{
 		// Get default language
 		$default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
@@ -69,10 +69,10 @@ class Omnisense extends Module{
 			'input' => array(
 				array(
 					'type' => 'text',
-					'label' => $this->l('key_api'),
+					'label' => $this->l('API_key'),
 					'name' => 'key_api',
 					'required' => true,
-					'hint' => $this->l('Entrer votre key_api Omnisense')
+					'hint' => $this->l('Entrer votre API_key Omnisense')
 				),
 				array(
 					'type' => 'text',
@@ -83,7 +83,7 @@ class Omnisense extends Module{
 				),
 				array(
 					'type' => 'radio',
-					'label' => $this->l('Synchroniser les information utilisateur?'),
+					'label' => $this->l('Conserver les information utilisateur?'),
 					'name' => 'keep_info',
 					'hint' => $this->l('Si un utilisateur supprime une donnée, doit-on les supprimée ?
 										Nous conseillons de désactiver cette option par défaut.'),
@@ -111,7 +111,7 @@ class Omnisense extends Module{
 		return $helper->generateForm($fields_form);
 	}
 
-//Get key_api and identifier from Configuration page
+//Get api_key and identifier from Configuration page
 	public function getContent()
 	{
 		$output = '';
@@ -121,19 +121,19 @@ class Omnisense extends Module{
 			if (!empty($key))
 			{
 				Configuration::updateValue('key_api', $key);
-				$output .= $this->displayConfirmation($this->l('Account key updated successfully'));
+				$output .= $this->displayConfirmation($this->l('API_key enregistré avec succée'));
 			}
 			$id = Tools::getValue('identifier');
 			if (!empty($id))
 			{
 				Configuration::updateValue('identifier', $id);
-				$output .= $this->displayConfirmation($this->l('Account identifier updated successfully'));
+				$output .= $this->displayConfirmation($this->l('Identifiant enregistré avec succée'));
 			}
 			$keep_enabled = Tools::getValue('keep_info');
 			if (null !== $keep_enabled)
 			{
 				Configuration::updateValue('keep_info', (bool)$keep_enabled);
-				$output .= $this->displayConfirmation($this->l('keep Enabled'));
+				$output .= $this->displayConfirmation($this->l('Conservation des information utilisateurs'));
 			}
 		}
 		if (version_compare(_PS_VERSION_, '1.5', '>='))
@@ -176,7 +176,7 @@ class Omnisense extends Module{
 		return $output;
 	}
 
-//Bloc Omnisense.start, key_api and identifier
+//Bloc Omnisense.start, api_key and identifier
 	public function	ft_omnistart($user)
 	{
 		$key = Configuration::get('key_api');
